@@ -9,4 +9,10 @@ isLeapYear year
   | year `divisibleBy` 400 = True
   | year `divisibleBy` 100 = False
   | otherwise = True
+
+isLeapYear' :: Integer -> Bool
+isLeapYear' year
+  | not $ year `divisibleBy` 4 = False
+  | year `divisibleBy` 100 && not (year `divisibleBy` 400) = False
+  | otherwise = True
                    
