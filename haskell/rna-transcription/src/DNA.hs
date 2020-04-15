@@ -1,12 +1,11 @@
 module DNA (toRNA) where
 
 toRNA :: String -> Either Char String
-toRNA = foldr fold $ Right ""
+toRNA = traverse dnaToRna
 
-fold :: Char -> Either Char String -> Either Char String
-fold _ (Left c)    = Left c
-fold 'G' (Right s) = Right $ 'C':s
-fold 'C' (Right s) = Right $ 'G':s
-fold 'T' (Right s) = Right $ 'A':s
-fold 'A' (Right s) = Right $ 'U':s
-fold x (Right _)   = Left x
+dnaToRna :: Char -> Either Char Char
+dnaToRna 'G' = Right 'C'
+dnaToRna 'C' = Right 'G'
+dnaToRna 'T' = Right 'A'
+dnaToRna 'A' = Right 'U'
+dnaToRna x   = Left x
