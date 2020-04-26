@@ -6,9 +6,9 @@ import qualified Data.Map as M
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts xs = mns >>= return . toMap 
+nucleotideCounts xs = toMap <$> mns
     where mns   = traverse toNucleotide xs
-          toMap = foldr (M.adjust $ succ) empty 
+          toMap = foldr (M.adjust succ) empty 
           empty = M.fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
 
 toNucleotide :: Char -> Either String Nucleotide
